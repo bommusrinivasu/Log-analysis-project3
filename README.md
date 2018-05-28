@@ -1,4 +1,4 @@
-# Log-analysis-project3
+# Logs-analysis-project3
 My third project
 ## About
 
@@ -12,18 +12,19 @@ This is the third project for the Udacity Full Stack Nanodegree. In this project
 - VirtualBox
 
 ### Setup
-1. Install Vagrant And VirtualBox
-2. Clone this repository
+1. Install Vagrant And VirtualBox in your PC
+2. Clone this repository 
 
 ### To Run
 
-Launch Vagrant VM by running `vagrant up`, you can the log in with `vagrant ssh`
+Launch Vagrant VM by running "vagrant up", you can the log in with "vagrant ssh"
 
-To load the data, use the command `psql -d news -f newsdata.sql` to connect a database and run the necessary SQL statements.
+To load the data, use the command "psql -d news -f newsdata.sql" to connect a database and run the necessary SQL statements.
+The "newsdata.sql" file is provided by the udacity.
 
 The database includes three tables:
 - Authors table
 - Articles table
 - Log table
 
-To execute the program, run `"python log.py" `from the command prompt.
+To execute the program, run "python log.py" from the command prompt.
