@@ -104,6 +104,7 @@ def with_errors():
         err = str(round(r[1]*100, 1)) + "%" + " errors"
         print(Date + " -- " + err)
 
+
 print('Executing The Results please wait...\n')
 Top3articles()
 Top3authors()
