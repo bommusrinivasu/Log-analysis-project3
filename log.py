@@ -20,13 +20,9 @@ def execute(goal):
         return cursor
     
 
-
-def Top3articles():
-    """This function returns the top three popular reading articles"""
-
-
-    # To Print output
-    print('\nTop three articles of all time:')
+"""This function returns the top three popular reading articles"""
+def articles():
+    print('\nTop three articles of all time by views:')
     output = execute("""  
         select title,count(*) as num from articles,log where
         log.path=CONCAT('/article/',articles.slug) group by
@@ -38,9 +34,9 @@ def Top3articles():
                print ("%s: %s views" % (result[0],result[1]))
 
     """This function returns the top three most popular authors"""
-def Top3authors():
+def authors():
 
-    # To run this Query
+    # this calling function passes the query
     output = execute( """
        SELECT authors.name,count(*) FROM log,articles,authors
        WHERE  log.path = '/article/' || articles.slug
@@ -54,10 +50,10 @@ def Top3authors():
     for r in output:
                 print ("%s: %s views" % (r[0], r[1]))
 
-def with_errors():
-    """This function returns days with more than 1% errors"""
-    # To Print the output
+"""This function returns days with more than 1% errors"""
+def errors():
     print('\nDays with more than 1% error:')
+    # this calling function passes the query
     output = execute( """
     select * from (select date(time),round(100.0*sum(case log.status
     when '200 OK'  then 0 else 1 end)/count(log.status),3)
@@ -68,6 +64,6 @@ def with_errors():
          print (" %s: %s views" % (result[0], result[1]))
 
 print('Executing The Results please wait...\n')
-Top3articles()
-Top3authors()
-with_errors()
+articles()
+authors()
+errors()
