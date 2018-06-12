@@ -26,10 +26,10 @@ def execute(goal):
 def articles():
     print('\nTop three articles of all time by views:')
     output = execute("""
-        select title,count(*) as num from articles,log where
-        log.path=CONCAT('/article/',articles.slug) group by
-        articles.title order by
-        num DESC limit 3;
+        SELECT title,COUNT(*) as num from articles,log where
+        log.path=CONCAT(' /article/ ',articles.slug) GROUP by
+        articles.title ORDER by
+        NUM DESC limit 3;
                  """)
     for result in output:
                 print ("%s: %s views" % (result[0], result[1]))
@@ -41,11 +41,11 @@ def authors():
 
     # this calling function passes the query
     output = execute("""
-       SELECT authors.name,count(*) FROM log,articles,authors
-       WHERE  log.path = '/article/' || articles.slug
+       SELECT authors.name, COUNT(*) FROM log,articles,authors
+       WHERE  log.path = ' /article/ ' || articles.slug
        AND articles.author = authors.id
        GROUP BY authors.name
-       ORDER BY count(*) DESC;
+       ORDER BY COUNT(*) DESC;
           """)
 
     # To Print the output
@@ -62,10 +62,10 @@ def errors():
 
     # This calling function passes the query
     output = execute("""
-    select * from (select date(time),round(100.0*sum(case log.status
-    when '200 OK'  then 0 else 1 end)/count(log.status),3)
-    as error from log group
-    by date(time) order by error desc) as subq where error > 1;
+    SELECT * from (select DATE(time),ROUND(100.0*sum(case log.status
+    WHEN '200 OK'  then 0 else 1 end) / COUNT(log.status),3)
+    as error FROM log GROUP
+    by DATE(time) ORDER by error DESC) as subq where error > 1;
                    """)
     # To print the output
     for result in output:
