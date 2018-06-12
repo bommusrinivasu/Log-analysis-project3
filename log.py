@@ -51,14 +51,17 @@ def authors():
 
 """This function returns days with more than 1% errors"""
 def errors():
+    
     print('\nDays with more than 1% error:')
-    # this calling function passes the query
+    
+    # This calling function passes the query
     output = execute( """
     select * from (select date(time),round(100.0*sum(case log.status
     when '200 OK'  then 0 else 1 end)/count(log.status),3)
     as error from log group
     by date(time) order by error desc) as subq where error > 1;
                    """)
+    #To print the output 
     for result in output:
          print (" %s: %s views" % (result[0], result[1]))
 
