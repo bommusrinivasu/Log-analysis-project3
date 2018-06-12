@@ -10,42 +10,47 @@ def execute(goal):
     try:
         conn = psycopg2.connect('dbname='+"news")
         cursor = conn.cursor()
+        # Executes the command
         cursor.execute(goal)
         data = cursor.fetchall()
-        conn.close()
     except:
+        # Rollback in case there is any error
         print("Failed to return to database postgresql")
+        conn.close()
         return None
     finally:
+        conn.close()
         return data
 
 
-"""This function returns the top three popular reading articles"""
+"""This function returns the top three popular reading articles details"""
 
 
 def articles():
     print('\nTop three articles of all time by views:')
+    # This calling function passes the query
     output = execute("""
         SELECT title,count(*) as num from articles,log where
-        log.path=CONCAT('/article/',articles.slug) group by
-        articles.title order by
-        num desc limit 3;
+        log.path=CONCAT('/article/',articles.slug) GROUP by
+        articles.title ORDER by
+        num DESC limit 3;
                  """)
+    # To Print the output
     for result in output:
                 print ("%s: %s views" % (result[0], result[1]))
 
-"""This function returns the top three most popular authors"""
+"""This function returns the top three most popular authors details"""
 
 
 def authors():
 
-    # this calling function passes the query
+    # This calling function passes the query
     output = execute("""
        SELECT authors.name,count(*) FROM log,articles,authors
        where  log.path = '/article/' || articles.slug
        AND articles.author = authors.id
-       group BY authors.name
-       order BY count(*) desc;
+       GROUP BY authors.name
+       ORDER BY count(*) DESC;
           """)
 
     # To Print the output
