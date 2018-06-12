@@ -41,11 +41,11 @@ def authors():
 
     # this calling function passes the query
     output = execute("""
-       SELECT authors.name, COUNT(*) FROM log,articles,authors
-       WHERE  log.path = ' /article/ ' || articles.slug
+       SELECT authors.name,count(*) FROM log,articles,authors
+       where  log.path = '/article/' || articles.slug
        AND articles.author = authors.id
-       GROUP BY authors.name
-       ORDER BY COUNT(*) DESC;
+       group BY authors.name
+       order BY count(*) desc;
           """)
 
     # To Print the output
