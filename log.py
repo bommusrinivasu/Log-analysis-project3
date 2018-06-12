@@ -2,7 +2,7 @@
 
 import psycopg2
 
-# Here goal defines the name of the quary
+# Here goal receives the query
 def execute(goal):
     """ This function connects to the database,
     runs quary,and returns the result """
@@ -12,12 +12,11 @@ def execute(goal):
         cursor.execute(goal)
         data = cursor.fetchall()
         conn.close()
-        return data
     except:
         print("Failed to return to database postgresql")
         return None
-    else:
-        return cursor
+    finally:
+        return data
     
 
 """This function returns the top three popular reading articles"""
@@ -33,7 +32,7 @@ def articles():
     for result in output:
                print ("%s: %s views" % (result[0],result[1]))
 
-    """This function returns the top three most popular authors"""
+"""This function returns the top three most popular authors"""
 def authors():
 
     # this calling function passes the query
