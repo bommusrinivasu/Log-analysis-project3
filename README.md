@@ -1,4 +1,4 @@
-# Logs-analysis-project3
+# Logs-analysis-project
 My third project
 ## About
 
@@ -21,7 +21,7 @@ Launch Vagrant VM by running "vagrant up", you can the log in with "vagrant ssh"
 
 To load the data, use the command "psql -d news -f newsdata.sql" to connect a database and run the necessary SQL statements.
 The "newsdata.sql" file is provided by the udacity.
-
+Then run "\c news" to coonect to the database news.
 The database includes three tables:
 - Authors table
 - Articles table
