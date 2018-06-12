@@ -10,9 +10,9 @@ def execute(goal):
         conn = psycopg2.connect('dbname='+"news")
         cursor = conn.cursor()
         cursor.execute(goal)
-        d = cursor.fetchall()
+        data = cursor.fetchall()
         conn.close()
-        return d
+        return data
     except:
         print("Failed to return to database postgresql")
         return None
