@@ -26,10 +26,10 @@ def execute(goal):
 def articles():
     print('\nTop three articles of all time by views:')
     output = execute("""
-        SELECT title,COUNT(*) as num from articles,log where
-        log.path=CONCAT(' /article/ ',articles.slug) GROUP by
-        articles.title ORDER by
-        NUM DESC limit 3;
+        SELECT title,count(*) as num from articles,log where
+        log.path=CONCAT('/article/',articles.slug) group by
+        articles.title order by
+        num desc limit 3;
                  """)
     for result in output:
                 print ("%s: %s views" % (result[0], result[1]))
